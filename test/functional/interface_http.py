@@ -755,10 +755,10 @@ class HTTPBasicsTest (BitcoinTestFramework):
 
         # If send() is blocked for this many seconds, we assume the server
         # is behaving correctly.
-        STALL_TIMEOUT = 5
+        STALL_TIMEOUT = int(5 * getattr(self.options, 'timeout_factor', 1))
         # If send() continues to progress for this many seconds, we assume
         # the server is vulnerable to memory exhaustion.
-        PROGRESS_TIMEOUT = 10
+        PROGRESS_TIMEOUT = int(30 * getattr(self.options, 'timeout_factor', 1))
 
         sent = 0
         stuck_since = None
